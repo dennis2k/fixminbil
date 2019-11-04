@@ -1,19 +1,66 @@
 {
-  "defaultSeverity": "warning",
-  "extends": [
-    "tslint:recommended"
-  ],
-  "linterOptions": {
-    "exclude": [
-      "node_modules/**"
-    ]
-  },
+  /*
+   * Possible values:
+   * - the name of a built-in config
+   * - the name of an NPM module which has a "main" file that exports a config object
+   * - a relative path to a JSON file
+   */
+  "extends": "tslint:latest",
   "rules": {
-    "indent": [true, "spaces", 2],
-    "interface-name": false,
-    "no-consecutive-blank-lines": false,
+      "interface-name": false,
+      "member-access": false,
+      "no-implicit-dependencies": false,
+    /* Any rules specified here will override those from the base config we are extending */
+
+    /*
+     * TypeScript Specific
+     */
+    "adjacent-overload-signatures": false,
+    "no-reference": false,
+    "no-submodule-imports": false,
+    /*
+     * Functionality
+     */
+    "no-object-literal-type-assertion": false,
+    "ban": [
+      true,
+      [ "_", "forEach" ],
+      [ "_", "each" ],
+      [ "$", "each" ]
+    ],
+    "member-ordering": [
+      false,
+      { "order": "fields-first" }
+    ],
+    "no-bitwise": false,
+    "no-console": [
+      false
+    ],
+    "no-string-literal": false,
+
+    /*
+     * Maintainability
+     */
+     "prefer-for-of": false,
+    "max-classes-per-file": [false],
+    "max-line-length": false,
     "object-literal-sort-keys": false,
-    "ordered-imports": false,
-    "quotemark": [true, "single"]
-  }
+    "trailing-comma": [
+      false,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
+
+    /*
+     * Style
+     */
+    "arrow-parens": false,
+    "ordered-imports": [
+      false
+    ],
+    "comment-format": false
+  },
+  "tslint.alwaysShowRuleFailuresAsWarnings" : true
 }
