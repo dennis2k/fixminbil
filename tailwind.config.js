@@ -164,6 +164,10 @@ module.exports = {
       '700p': '700px',
       '800p': '800px',
       '900p': '900px',
+      '1000p': '1000px',
+      '1100p': '1100px',
+      '1200p': '1200px',
+      '1300p': '1300px',
 
     },
     backgroundColor: theme => theme('colors'),
@@ -298,6 +302,7 @@ module.exports = {
     },
     height: theme => ({
       auto: 'auto',
+      1080: "1080px",
       ...theme('spacing'),
       full: '100%',
       screen: '100vh',
@@ -336,8 +341,8 @@ module.exports = {
       full: '100%',
       screen: '100vh',
     },
-    maxWidth: {
-
+    maxWidth: (theme) => ({
+      ...theme('spacing'),
       xs: '20rem',
       sm: '24rem',
       md: '28rem',
@@ -350,7 +355,7 @@ module.exports = {
       '5xl': '64rem',
       '6xl': '72rem',
       full: '100%',
-    },
+    }),
     minHeight: {
       '0': '0',
       full: '100%',
