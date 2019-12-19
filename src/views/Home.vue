@@ -6,9 +6,13 @@
     <div class="w-full mt-28 md:mt-0 home bg-cover md:h-1080 md:overflow-hidden">
       <div class="md:py-300p py-10 w-full max-w-container flex justify-center mx-auto">
         <div class="md:text-7xl text-3xl font-semibold">
-          <h2 class="text-blue-400">Service og reparation</h2>
-          <div class="text-white" id="service-mobile">af alle bilmærker</div>
-          <div class="text-white text-xl md:text-4xl uppercase pt-4 italic">- 40 års erfaring</div>
+          <transition name="fade-drop" appear="">
+            <div>
+              <h2 class="text-blue-400">Service og reparation</h2>
+              <div class="text-white" id="service-mobile">af alle bilmærker</div>
+              <div class="text-white text-xl md:text-4xl uppercase pt-4 italic">- 40 års erfaring</div>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -56,6 +60,7 @@
                     type="text"
                     class="outline-none border border-gray-400"
                     v-model="name"
+                    required="required"
                   />
                   <label>Navn</label>
                 </div>
@@ -67,6 +72,7 @@
                     type="text"
                     class="outline-none border border-gray-400"
                     v-model="phone"
+                    required="required"
                   />
                   <label>Telefon / Email</label>
                 </div>
@@ -78,6 +84,7 @@
                     name="whatiswrong"
                     class="outline-none w-full border border-gray-400"
                     style="height: 100px; padding: 12px"
+                    required="required"
                   ></textarea>
                   <label>Problem</label>
                 </div>
@@ -216,16 +223,17 @@
                   <label>Problem</label>
                 </div>
               </div>
-              <div class="w-full flex justify-end">
+              <div class="w-full flex justify-end items-center">
+                <div class="flex-1" v-if="successMessage || errorMessage">
+                  <div v-if="successMessage" class="text-green-600">{{successMessage}}</div>
+                  <div v-if="errorMessage" class="text-red-600">{{errorMessage}}</div>
+                </div>
                 <button
                   class="px-4 py-2 bg-blue-600 text-white mt-4 hover:bg-blue-400"
                   @click="sendMail"
                 >Send</button>
               </div>
-              <div class="pt-4" v-if="successMessage || errorMessage">
-                <div v-if="successMessage" class="text-green-600">{{successMessage}}</div>
-                <div v-if="errorMessage" class="text-red-600">{{errorMessage}}</div>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -337,6 +345,12 @@ export default class Home extends Vue {
     try {
       this.successMessage = "";
       this.errorMessage = "";
+
+      if (!this.name.trim() || !this.phone.trim() || !this.body.trim()) {
+        this.errorMessage = "Udfyld venligst alle felter";
+        return;
+      }
+
       const response = await fetch(
         "http://app.easylocalizer.com/api/v1/custom_send_email",
         {
@@ -373,7 +387,7 @@ export default class Home extends Vue {
 .home {
   width: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("https://res.cloudinary.com/dv6mzgcxx/image/upload/w_1920,e_art:incognito/v1576755067/IMG_5526_ygwj6a.jpg");
+    url("https://res.cloudinary.com/dv6mzgcxx/image/upload/e_grayscale/v1576764122/IMG_5526_ygwj6a.jpg");
   background-repeat: no-repeat;
 }
 

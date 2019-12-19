@@ -7,3 +7,17 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.fade-drop-enter-active,
+.fade-drop-leave-active {
+  transition-duration: 0.6s;
+  transition-property: all;
+  transition-timing-function: ease;
+  transform: translateY(0);
+}
+
+.fade-drop-enter,
+.fade-drop-leave-active {
+  opacity: 0;
+  transform: translateY(-30px);
+}
